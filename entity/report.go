@@ -1,5 +1,7 @@
 package entity
 
+type GamesReport map[string]GameReport
+
 type GameReport struct {
 	TotalKills   int            `json:"total_kills"`
 	Players      []string       `json:"players"`

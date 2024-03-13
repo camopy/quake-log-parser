@@ -1,11 +1,24 @@
 package entity
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 var (
 	ErrPlayerNotFound = errors.New("Player not found")
 	worldKill         = "<world>"
 )
+
+type Games []*Game
+
+func (g Games) GenerateReport() GamesReport {
+	reports := make(GamesReport)
+	for i, game := range g {
+		reports[fmt.Sprintf("game-%d", i+1)] = game.GenerateReport()
+	}
+	return reports
+}
 
 type Game struct {
 	totalKills    int
@@ -94,8 +107,8 @@ func (g *Game) incrementKillsByMeans(means string) {
 	g.killsByMeans[means]++
 }
 
-func (g *Game) GenerateReport() *GameReport {
-	return &GameReport{
+func (g *Game) GenerateReport() GameReport {
+	return GameReport{
 		TotalKills:   g.totalKills,
 		Players:      g.playerNames(),
 		Kills:        g.killsByPlayer(),

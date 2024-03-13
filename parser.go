@@ -23,7 +23,7 @@ var (
 
 type Parser struct {
 	logPath string
-	games   []*entity.Game
+	games   entity.Games
 }
 
 func NewParser(logPath string) *Parser {
@@ -33,7 +33,7 @@ func NewParser(logPath string) *Parser {
 	}
 }
 
-func (p *Parser) Parse() ([]*entity.Game, error) {
+func (p *Parser) Parse() (entity.Games, error) {
 	f, err := os.Open(p.logPath)
 	if err != nil {
 		return nil, err
