@@ -22,6 +22,10 @@ func NewGame() *Game {
 	}
 }
 
+func (g *Game) PlayerCount() int {
+	return len(g.playersById)
+}
+
 func (g *Game) AddPlayer(id int) {
 	g.playersById[id] = &Player{
 		id: id,
@@ -53,6 +57,10 @@ func (g *Game) getPlayerById(id int) (*Player, error) {
 func (g *Game) AddKill(killer string, killed string, means string) error {
 	g.incrementTotalKills()
 	g.incrementKillsByMeans(means)
+	// TODO: should we ignore kills where killer == killed?
+	//if killer == killed {
+	//	return nil
+	//}
 
 	if killer == worldKill {
 		p, err := g.getPlayerByName(killed)
