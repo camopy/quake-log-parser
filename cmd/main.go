@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	outputFilePtr := flag.String("output-file", "", "output file path")
+	outputFilePtr := flag.String("o", "", "output file path")
 
 	flag.Parse()
 
@@ -32,11 +32,11 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	fmt.Println(string(output))
-
 	if *outputFilePtr != "" {
 		if err := os.WriteFile(*outputFilePtr, output, 0644); err != nil {
 			log.Fatalln(err)
 		}
 	}
+
+	fmt.Println(string(output))
 }
