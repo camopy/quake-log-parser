@@ -70,12 +70,8 @@ func (g *Game) getPlayerById(id int) (*Player, error) {
 func (g *Game) AddKill(killer string, killed string, means string) error {
 	g.incrementTotalKills()
 	g.incrementKillsByMeans(means)
-	// TODO: should we ignore kills where killer == killed?
-	//if killer == killed {
-	//	return nil
-	//}
 
-	if killer == worldKill {
+	if killer == worldKill || killer == killed {
 		p, err := g.getPlayerByName(killed)
 		if err != nil {
 			return err

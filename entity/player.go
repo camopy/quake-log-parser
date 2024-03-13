@@ -11,7 +11,6 @@ func (p *Player) addKill() {
 }
 
 func (p *Player) removeKill() {
-	// TODO: should we decrement kills if it's already 0?
 	p.kills--
 }
 
